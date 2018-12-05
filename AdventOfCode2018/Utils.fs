@@ -1,4 +1,4 @@
-﻿module Commons
+﻿module Utils
 
 open System.IO
 open System.Reflection

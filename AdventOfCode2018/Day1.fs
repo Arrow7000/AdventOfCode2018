@@ -2,7 +2,7 @@
 
 module Day1
 
-open Commons
+open Utils
 
 let changes =
     getLines "Day1.txt"

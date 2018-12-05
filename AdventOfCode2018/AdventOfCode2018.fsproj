@@ -9,7 +9,7 @@
     <Content Include="inputs\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Commons.fs" />
+    <Compile Include="Utils.fs" />
     <Compile Include="Day1.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
