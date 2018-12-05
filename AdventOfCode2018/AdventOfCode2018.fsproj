@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="inputs\Day1.txt" />
+    <Compile Include="Commons.fs" />
+    <Compile Include="Day1.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
 </Project>
