@@ -9,8 +9,10 @@ let printForDay dayNum partNum result =
 
 [<EntryPoint>]
 let main _ =
-    [ 1, 1, Day1.part1
-      1, 2, Day1.part2 ]
+    [ [ 1, 1, Day1.part1
+        1, 2, Day1.part2 ]
+      [ 2, 1, Day2.part1 ] ]
+    |> List.collect id
     |> List.iter (applyTrip printForDay)
     
     System.Console.ReadKey() |> ignore
