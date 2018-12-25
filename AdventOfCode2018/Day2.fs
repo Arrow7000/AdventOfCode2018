@@ -38,3 +38,27 @@ let part1 =
     |> List.map getCounts
     |> multiplyBools
     |> fun (a,b) -> a * b
+
+
+
+type GappedStrings = (string * string) list
+
+let getGappedStrings (str : string) : GappedStrings =
+    [0..str.Length - 1]
+    |> List.map (fun i -> str.Substring(0, i), str.Substring(i+1))
+
+let exactlyOneInCommon listA listB =
+    let intersect = Set.intersect (Set.ofList listA) (Set.ofList listB)
+    match Set.toList intersect with
+    | [ item ] -> Some item
+    | _ -> None
+
+
+let part2 =
+    lines
+    |> List.allPairs lines
+    |> List.filter (fun (a,b) -> not (a = b)) // Strip pairs of same string
+    |> List.distinctBy (fun (a,b) -> List.sort [a;b] |> List.reduce (+)) // Strip identical pairs in reverse different order
+    |> List.choose (fun (a,b) -> exactlyOneInCommon (getGappedStrings a) (getGappedStrings b)) // Get pairs that have exactly one gapped string in common
+    |> List.map (fun (a,b) -> a + b) // Concat gapped strings
+    |> List.exactlyOne // Assert only one item is left
