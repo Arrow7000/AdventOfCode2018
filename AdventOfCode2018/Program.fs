@@ -17,7 +17,7 @@ let inline s x = string x
 let main _ =
     [ s Day1.part1, s Day1.part2
       s Day2.part1, s Day2.part2
-      s Day3.part1, s "" ]
+      s Day3.part1, s Day3.part2 ]
     |> List.iteri (fun i (a,b) -> printResult (i+1) a b)
     
     System.Console.ReadKey() |> ignore

@@ -57,8 +57,40 @@ let getClaims rects =
 
     computer Map.empty rects
 
-
-let part1 =
+let rects =
     lines
     |> List.map getRect
-    |> getClaims
+
+let part1 = getClaims rects
+
+
+
+let intersect (rect1 : Rect) (rect2 : Rect) =
+    let areVerticallyDisparate =
+        rect1.Top > rect2.Top + rect2.Height || rect1.Top + rect1.Height < rect2.Top
+
+    let areHorizonDisparate =
+        rect1.Left + rect1.Width < rect2.Left || rect1.Left > rect2.Left + rect2.Width
+
+    let theyDoIntersect = not (areVerticallyDisparate || areHorizonDisparate)
+    theyDoIntersect
+
+
+
+let getNonOverlappingClaimId rects =
+    let rec eliminate rectSet rects =
+        match rects with
+        | [] ->
+            rectSet
+            |> Set.toList
+            |> List.exactlyOne
+            |> fun rect -> rect.Id
+        | rect :: rest ->
+            let newSet =
+                rectSet
+                |> Set.filter (fun setRect -> setRect.Id = rect.Id || not (intersect setRect rect))
+            eliminate newSet rest
+
+    eliminate (Set.ofList rects) rects
+
+let part2 = getNonOverlappingClaimId rects
